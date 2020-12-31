@@ -9,7 +9,7 @@ function chillHopMusics () {
       cover: "https://chillhop.com/wp-content/uploads/2020/07/edaf1202cf33c7a2a122b7494a7e4d3e643af45f-1024x1024.jpg",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=9320",
       color: [ '#DE7497', '#A64067' ],
-      active: true
+      active: false
     },
     {
       id: uuid(),
@@ -18,7 +18,7 @@ function chillHopMusics () {
       cover: "https://chillhop.com/wp-content/uploads/2020/09/09fb436604242df99f84b9f359acb046e40d2e9e-1024x1024.jpg",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10136",
       color: [ '#5A4F8B', '#966B8B' ],
-      active: false
+      active: true
     },
     {
       id: uuid(),
@@ -31,10 +31,10 @@ function chillHopMusics () {
     },
     {
       id: uuid(),
-      name: "Wake Up",
-      artist: "Miscél",
-      cover: "https://chillhop.com/wp-content/uploads/2020/07/edaf1202cf33c7a2a122b7494a7e4d3e643af45f-1024x1024.jpg",
-      audio: "https://mp3.chillhop.com/serve.php/?mp3=",
+      name: "Hereafter",
+      artist: "Makzo",
+      cover: "https://chillhop.com/wp-content/uploads/2020/11/f78c39b4bb6313ddd0354bef896c591bfb490ff8-1024x1024.jpg",
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=11770",
       color: [ '#DE7497', '#A64067' ],
       active: false
     },

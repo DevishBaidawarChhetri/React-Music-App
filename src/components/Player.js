@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaStepBackward, FaPlay, FaStepForward, FaPause } from 'react-icons/fa';
 
-const Player = ( {audioRef, currentSong, isPlaying, setIsPlaying, songInfo, setSongInfo } ) => {
+const Player = ( { audioRef, currentSong, isPlaying, setIsPlaying, songInfo, setSongInfo } ) => {
 
   /* ----- Play Song Event Handlers Begins -----*/
   const playSongHandler = () => {
@@ -37,7 +37,7 @@ const Player = ( {audioRef, currentSong, isPlaying, setIsPlaying, songInfo, setS
         <input
           type="range"
           min={ 0 }
-          max={ songInfo.fullTime }
+          max={ songInfo.fullTime || 0 }
           value={ songInfo.currentTime }
           onChange={ timeRangeHandler }
         />
