@@ -49,7 +49,7 @@ function chillHopMusics () {
     },
     {
       id: uuid(),
-      name: "hau Nalu",
+      name: "Hau Nalu",
       artist: "FloFilz, Kostral One",
       cover: "https://chillhop.com/wp-content/uploads/2020/10/0e5bb63f838ff92eeac142aae944e9f678df13c9-1024x1024.jpg",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10334",

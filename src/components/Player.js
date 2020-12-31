@@ -1,10 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FaStepBackward, FaPlay, FaStepForward, FaPause } from 'react-icons/fa';
 
-const Player = ( { currentSong, isPlaying, setIsPlaying } ) => {
-  /* ----- Audio Ref Begins ----- */
-  const audioRef = useRef( null );
-  /* ----- Audio Ref Ends ----- */
+const Player = ( {audioRef, currentSong, isPlaying, setIsPlaying, songInfo, setSongInfo } ) => {
 
   /* ----- Play Song Event Handlers Begins -----*/
   const playSongHandler = () => {
@@ -17,22 +14,6 @@ const Player = ( { currentSong, isPlaying, setIsPlaying } ) => {
     }
   }
   /* ----- Play Song Event Handlers Ends -----*/
-
-  /* ----- Song Info State Begins ----- */
-  const [ songInfo, setSongInfo ] = useState( {
-    currentTime: 0,
-    fullTime: 0
-  } );
-  /* ----- Song Info State Ends ----- */
-
-  /* ----- Updating Time Begins ----- */
-  const timeUpdateHandler = ( e ) => {
-    // console.log( e );
-    const currentTime = e.target.currentTime;
-    const fullTime = e.target.duration;
-    setSongInfo( { ...songInfo, currentTime, fullTime } );
-  }
-  /* ----- Updating Time Ends ----- */
 
   /* ----- Time Formatting Begins ----- */
   const getTime = ( time ) => {
@@ -71,12 +52,6 @@ const Player = ( { currentSong, isPlaying, setIsPlaying } ) => {
         }
         <FaStepForward className="skip-forward" size="28px" />
       </div>
-      <audio
-        src={ currentSong.audio }
-        ref={ audioRef }
-        onTimeUpdate={ timeUpdateHandler }
-        onLoadedMetadata={ timeUpdateHandler }
-      ></audio>
     </div>
   )
 }
