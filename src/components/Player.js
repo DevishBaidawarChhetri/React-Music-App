@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaStepBackward, FaPlay, FaStepForward, FaPause } from 'react-icons/fa';
+import { playAudio } from '../util'
+const Player = ( { audioRef, currentSong, isPlaying, setIsPlaying, songInfo, setSongInfo, songs, setCurrentSong, setSongs } ) => {
 
-const Player = ( { audioRef, currentSong, isPlaying, setIsPlaying, songInfo, setSongInfo } ) => {
+  useEffect( () => {
+    // Add Active State
+    const newSongs = songs.map( ( song ) => {
+      if ( song.id === currentSong.id ) {
+        return { ...song, active: true }
+      } else {
+        return { ...song, active: false }
+      }
+    } );
+    setSongs( newSongs );
+  }, [ currentSong ] )
 
   /* ----- Play Song Event Handlers Begins -----*/
   const playSongHandler = () => {
@@ -30,6 +42,26 @@ const Player = ( { audioRef, currentSong, isPlaying, setIsPlaying, songInfo, set
     setSongInfo( { ...songInfo, currentTime: e.target.value } )
   };
   /* ----- Time Range Handler Ends ----- */
+
+  /* ----- Skip Track Handler Begins ----- */
+  const skipTrackHandler = ( direction ) => {
+    let currentIndex = songs.findIndex( ( song ) => song.id === currentSong.id );
+    if ( direction === "skipBackwards" ) {
+      if ( ( currentIndex - 1 ) % songs.length === -1 ) {
+        setCurrentSong( songs[ ( songs.length - 1 ) ] );
+        playAudio( isPlaying, audioRef );
+        return;
+      }
+      setCurrentSong( songs[ ( currentIndex - 1 ) % songs.length ] );
+    }
+    if ( direction === "skipForward" ) {
+      setCurrentSong( songs[ ( currentIndex + 1 ) % songs.length ] );
+      // console.log( `next index ${ currentIndex + 1 } and songs length ${ songs.length}`);
+    }
+    playAudio( isPlaying, audioRef );
+  }
+  /* ----- Skip Track Handler Ends ----- */
+
   return (
     <div className="player-container">
       <div className="time-control">
@@ -44,13 +76,21 @@ const Player = ( { audioRef, currentSong, isPlaying, setIsPlaying, songInfo, set
         <p><strong>{ getTime( songInfo.fullTime ) }</strong></p>
       </div>
       <div className="play-control">
-        <FaStepBackward className="skip-back" size="28px" />
+        <FaStepBackward
+          className="skip-back"
+          size="28px"
+          onClick={ () => skipTrackHandler( 'skipBackwards' ) }
+        />
         {
           isPlaying
             ? <FaPause className="pause" size="28px" onClick={ playSongHandler } />
             : <FaPlay className="play" size="28px" onClick={ playSongHandler } />
         }
-        <FaStepForward className="skip-forward" size="28px" />
+        <FaStepForward
+          className="skip-forward"
+          size="28px"
+          onClick={ () => skipTrackHandler( 'skipForward' ) }
+        />
       </div>
     </div>
   )
