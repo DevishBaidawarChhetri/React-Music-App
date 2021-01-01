@@ -10,9 +10,25 @@
     border: 2px solid rgb(65,65,65);
     transition: all 0.25s ease;
     padding: 0.5rem;
+    z-index: 9999;
     &:hover{
       background-color: rgb(65,65,65);
       color: #ffffff;
+    }
+  }
+}
+
+.nav-active {
+  color: #ffffff;
+  background: #000000 !important;
+  border-radius: 0 !important;
+}
+
+
+@media screen and (max-width: 768px) {
+  nav{
+    button{
+      z-index: 10;
     }
   }
 }

@@ -33,7 +33,6 @@ function App () {
     const roundedCurrentTime = Math.round( currentTime );
     const roundedFullTime = Math.round( fullTime );
     const animation = Math.round( ( roundedCurrentTime / roundedFullTime ) * 100 ); // get time in percentage
-    console.log( animation );
     setSongInfo( { ...songInfo, currentTime, fullTime, animatePercentage: animation } );
   }
   /* ----- Updating Time Handler Ends ----- */
@@ -46,24 +45,38 @@ function App () {
   }
   /* ----- Toggle Library Ends ----- */
 
+  /* ----- Song End Handler Begins ----- */
+  const songEndHandler = async () => {
+    let currentIndex = songs.findIndex( ( song ) => song.id === currentSong.id );
+    await setCurrentSong( songs[ ( currentIndex + 1 ) % songs.length ] );
+    if ( isPlaying )
+      audioRef.current.play();
+  }
+  /* ----- Song End Handler Ends ----- */
   return (
-    <div className="App">
+    <div className={ `App ${ libraryStatus ? 'library-active' : '' }` }>
+
       <Nav libraryStatus={ libraryStatus } setLibraryStatus={ setLibraryStatus } />
-      <Song
-        currentSong={ currentSong }
-        toggleLibrary={ toggleLibrary }
-      />
-      <Player
-        audioRef={ audioRef }
-        currentSong={ currentSong }
-        isPlaying={ isPlaying }
-        setIsPlaying={ setIsPlaying }
-        songInfo={ songInfo }
-        setSongInfo={ setSongInfo }
-        songs={ songs }
-        setCurrentSong={ setCurrentSong }
-        setSongs={ setSongs }
-      />
+      <div className="player-wrapper">
+        <div className="player">
+          <Song
+            currentSong={ currentSong }
+            isPlaying={ isPlaying }
+            toggleLibrary={ toggleLibrary }
+          />
+          <Player
+            audioRef={ audioRef }
+            currentSong={ currentSong }
+            isPlaying={ isPlaying }
+            setIsPlaying={ setIsPlaying }
+            songInfo={ songInfo }
+            setSongInfo={ setSongInfo }
+            songs={ songs }
+            setCurrentSong={ setCurrentSong }
+            setSongs={ setSongs }
+          />
+        </div>
+      </div>
       <Library
         audioRef={ audioRef }
         songs={ songs }
@@ -77,8 +90,10 @@ function App () {
         ref={ audioRef }
         onTimeUpdate={ timeUpdateHandler }
         onLoadedMetadata={ timeUpdateHandler }
+        onEnded={ songEndHandler }
       ></audio>
     </div>
+
   );
 }
 
