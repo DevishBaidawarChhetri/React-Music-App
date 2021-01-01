@@ -19,23 +19,40 @@ function App () {
   /* ----- Song Info State Begins ----- */
   const [ songInfo, setSongInfo ] = useState( {
     currentTime: 0,
-    fullTime: 0
+    fullTime: 0,
+    animatePercentage: 0
   } );
   /* ----- Song Info State Ends ----- */
 
   /* ----- Updating Time Handler Begins ----- */
   const timeUpdateHandler = ( e ) => {
-    // console.log( e );
     const currentTime = e.target.currentTime;
     const fullTime = e.target.duration;
-    setSongInfo( { ...songInfo, currentTime, fullTime } );
+
+    // Calculate percentage for animation
+    const roundedCurrentTime = Math.round( currentTime );
+    const roundedFullTime = Math.round( fullTime );
+    const animation = Math.round( ( roundedCurrentTime / roundedFullTime ) * 100 ); // get time in percentage
+    console.log( animation );
+    setSongInfo( { ...songInfo, currentTime, fullTime, animatePercentage: animation } );
   }
   /* ----- Updating Time Handler Ends ----- */
 
+  /* ----- Toggle Library Begins ----- */
+  const toggleLibrary = () => {
+    if ( toggleLibrary ) {
+      setLibraryStatus( !toggleLibrary )
+    }
+  }
+  /* ----- Toggle Library Ends ----- */
+
   return (
     <div className="App">
-      <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus}/>
-      <Song currentSong={ currentSong } />
+      <Nav libraryStatus={ libraryStatus } setLibraryStatus={ setLibraryStatus } />
+      <Song
+        currentSong={ currentSong }
+        toggleLibrary={ toggleLibrary }
+      />
       <Player
         audioRef={ audioRef }
         currentSong={ currentSong }
@@ -43,9 +60,9 @@ function App () {
         setIsPlaying={ setIsPlaying }
         songInfo={ songInfo }
         setSongInfo={ setSongInfo }
-        songs={songs}
-        setCurrentSong={setCurrentSong}
-        setSongs={setSongs}
+        songs={ songs }
+        setCurrentSong={ setCurrentSong }
+        setSongs={ setSongs }
       />
       <Library
         audioRef={ audioRef }
@@ -53,7 +70,7 @@ function App () {
         setSongs={ setSongs }
         setCurrentSong={ setCurrentSong }
         isPlaying={ isPlaying }
-        libraryStatus={ libraryStatus}
+        libraryStatus={ libraryStatus }
       />
       <audio
         src={ currentSong.audio }

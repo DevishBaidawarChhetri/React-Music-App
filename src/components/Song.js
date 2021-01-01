@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Song = ( { currentSong } ) => {
+const Song = ( { currentSong, toggleLibrary } ) => {
   return (
-    <div className="song-container">
+    <div className="song-container" onClick={ toggleLibrary }>
       <img src={ currentSong.cover } alt={ currentSong.name } />
       <h2>{ currentSong.name }</h2>
       <h3>{ currentSong.artist }</h3>

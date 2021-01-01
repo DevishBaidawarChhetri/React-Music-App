@@ -26,7 +26,7 @@ function chillHopMusics () {
       artist: "ØDYSSEE, Florent Garcia",
       cover: "https://chillhop.com/wp-content/uploads/2020/06/d9d8ae69141cb7838e3c53bbf393c6218285e384-1024x1024.jpg",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=9285",
-      color: [ '#FFC8BD', '#F9C8BE' ],
+      color: [ '#FFC8BD', '#8093FF' ],
       active: false
     },
     {
@@ -35,7 +35,7 @@ function chillHopMusics () {
       artist: "Makzo",
       cover: "https://chillhop.com/wp-content/uploads/2020/11/f78c39b4bb6313ddd0354bef896c591bfb490ff8-1024x1024.jpg",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=11770",
-      color: [ '#DE7497', '#A64067' ],
+      color: [ '#DE7497', '#FCD35C' ],
       active: false
     },
     {
