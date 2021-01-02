@@ -3,7 +3,7 @@ import React from 'react';
 const Song = ( { currentSong, isPlaying, toggleLibrary } ) => {
   return (
     <div className="song-container" onClick={ toggleLibrary }>
-      {console.log( isPlaying ) }
+      {/* {console.log( isPlaying ) } */ }
       <img
         className={ isPlaying ? "rotateImage" : "" }
         src={ currentSong.cover }

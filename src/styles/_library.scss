@@ -35,10 +35,12 @@
 
       h3 {
         font-size: 1rem;
+        text-transform: capitalize;
       }
 
       h4 {
         font-size: 0.8rem;
+        text-transform: capitalize;
       }
     }
   }
@@ -55,6 +57,6 @@
 
 @media screen and (max-width: 768px) {
   .library {
-    width: 100%;
+    width: 70%;
   }
 }
