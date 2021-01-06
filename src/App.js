@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme, GlobalStyles } from './themes';
 import './styles/app.scss';
 import Nav from './components/Nav';
 import Song from './components/Song';
@@ -15,6 +17,7 @@ function App () {
   const [ currentSong, setCurrentSong ] = useState( songs[ 1 ] );
   const [ isPlaying, setIsPlaying ] = useState( false );
   const [ libraryStatus, setLibraryStatus ] = useState( false );
+  const [ theme, setTheme ] = useState( "light" );
 
   /* ----- Song Info State Begins ----- */
   const [ songInfo, setSongInfo ] = useState( {
@@ -23,6 +26,14 @@ function App () {
     animatePercentage: 0
   } );
   /* ----- Song Info State Ends ----- */
+
+  /* ----- Theme Begins ----- */
+
+  const themeToggler = () => {
+    theme === "light" ? setTheme( "dark" ) : setTheme( "light" );
+  }
+
+  /* ----- Theme Ends ----- */
 
   /* ----- Updating Time Handler Begins ----- */
   const timeUpdateHandler = ( e ) => {
@@ -54,47 +65,58 @@ function App () {
   }
   /* ----- Song End Handler Ends ----- */
   return (
-    <div className={ `App ${ libraryStatus ? 'library-active' : '' }` }>
-
-      <Nav libraryStatus={ libraryStatus } setLibraryStatus={ setLibraryStatus } />
-      <div className="player-wrapper">
-        <div className="player">
-          <Song
-            currentSong={ currentSong }
-            isPlaying={ isPlaying }
-            toggleLibrary={ toggleLibrary }
-          />
-          <Player
-            audioRef={ audioRef }
-            currentSong={ currentSong }
-            isPlaying={ isPlaying }
-            setIsPlaying={ setIsPlaying }
-            songInfo={ songInfo }
-            setSongInfo={ setSongInfo }
-            songs={ songs }
-            setCurrentSong={ setCurrentSong }
-            setSongs={ setSongs }
-          />
+    <ThemeProvider theme={ theme === "light" ? lightTheme : darkTheme }>
+      <GlobalStyles />
+      <StyledApp className={ `App ${ libraryStatus ? 'library-active' : '' }` }>
+        <Nav libraryStatus={ libraryStatus } setLibraryStatus={ setLibraryStatus } themeToggler={ themeToggler } />
+        <div className="player-wrapper">
+          <div className="player">
+            <Song
+              currentSong={ currentSong }
+              isPlaying={ isPlaying }
+              toggleLibrary={ toggleLibrary }
+            />
+            <Player
+              audioRef={ audioRef }
+              currentSong={ currentSong }
+              isPlaying={ isPlaying }
+              setIsPlaying={ setIsPlaying }
+              songInfo={ songInfo }
+              setSongInfo={ setSongInfo }
+              songs={ songs }
+              setCurrentSong={ setCurrentSong }
+              setSongs={ setSongs }
+            />
+          </div>
         </div>
-      </div>
-      <Library
-        audioRef={ audioRef }
-        songs={ songs }
-        setSongs={ setSongs }
-        setCurrentSong={ setCurrentSong }
-        isPlaying={ isPlaying }
-        libraryStatus={ libraryStatus }
-      />
-      <audio
-        src={ currentSong.audio }
-        ref={ audioRef }
-        onTimeUpdate={ timeUpdateHandler }
-        onLoadedMetadata={ timeUpdateHandler }
-        onEnded={ songEndHandler }
-      ></audio>
-    </div>
-
+        <Library
+          audioRef={ audioRef }
+          songs={ songs }
+          setSongs={ setSongs }
+          setCurrentSong={ setCurrentSong }
+          isPlaying={ isPlaying }
+          libraryStatus={ libraryStatus }
+        />
+        <audio
+          src={ currentSong.audio }
+          ref={ audioRef }
+          onTimeUpdate={ timeUpdateHandler }
+          onLoadedMetadata={ timeUpdateHandler }
+          onEnded={ songEndHandler }
+        ></audio>
+      </StyledApp>
+    </ThemeProvider>
   );
 }
+
+const StyledApp = styled.div`
+  color: ${ props => props.theme.fontColor };
+  h1, h2, h3, button{
+    color: ${ props => props.theme.fontColor };
+  }
+  button{
+    border: 2px solid ${ props => props.theme.fontColor };
+  }
+`;
 
 export default App;

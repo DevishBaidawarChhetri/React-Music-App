@@ -1,9 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 import LibrarySong from './LibrarySong';
 
 const Library = ( { audioRef, songs, setSongs, setCurrentSong, isPlaying, libraryStatus } ) => {
   return (
-    <div className={ `library ${ libraryStatus ? 'active-library' : '' }` }>
+    <Styledlibrary className={ `library ${ libraryStatus ? 'active-library' : '' }` }>
       <h2>Library</h2>
       <div className="library-songs">
         {
@@ -21,8 +22,11 @@ const Library = ( { audioRef, songs, setSongs, setCurrentSong, isPlaying, librar
           ) )
         }
       </div>
-    </div>
+    </Styledlibrary>
   )
 }
-
+const Styledlibrary = styled.div`
+  color: ${ props => props.theme.body };
+  background-color: ${ props => props.theme.body };
+`;
 export default Library;
