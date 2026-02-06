@@ -6,22 +6,12 @@ function chillHopMusics() {
   return [
     {
       id: uuid(),
-      name: "ma hoon yaatri",
-      artist: "mc flo ft. mac and yamabuddha",
-      cover:
-        "https://scontent.fktm8-1.fna.fbcdn.net/v/t1.0-9/1497809_10151847660603435_304354483_n.jpg?_nc_cat=102&ccb=2&_nc_sid=9267fe&_nc_ohc=nzCC93A75tAAX9qnnQ0&_nc_ht=scontent.fktm8-1.fna&oh=c2c062c96b304cba7bb3899fd95df54c&oe=6012FDE5",
-      audio: `${base_url}/ma-hu-yaatri-mc-flo.mp3`,
-      color: ["#B0B0B0", "#A64067"],
-      active: false,
-    },
-    {
-      id: uuid(),
       name: "love somebody",
       artist: "maroon 5",
       cover: "https://m.media-amazon.com/images/I/81n9uETN6UL._SS500_.jpg",
       audio: `${base_url}/love-somebody-maroon5.mp3`,
       color: ["#1DC3E0", "#FD48BD"],
-      active: true,
+      active: false,
     },
     {
       id: uuid(),
@@ -31,7 +21,7 @@ function chillHopMusics() {
         "https://i1.sndcdn.com/artworks-8vfvuypQlqVI93cO-Zu7vmw-t500x500.jpg",
       audio: `${base_url}/be-kind-official-music-video-marshmello-and-halsey.mp3`,
       color: ["#F06E7A", "#E5E4E0"],
-      active: false,
+      active: true,
     },
     {
       id: uuid(),
@@ -69,6 +59,16 @@ function chillHopMusics() {
       cover: "https://m.media-amazon.com/images/I/81n9uETN6UL._SS500_.jpg",
       audio: `${base_url}/payphone-maroon5-no-rap-clean-version.mp3`,
       color: ["#75AAB8", "#FD48BD"],
+      active: false,
+    },
+    {
+      id: uuid(),
+      name: "ma hoon yaatri",
+      artist: "mc flo ft. mac and yamabuddha",
+      cover:
+        "https://scontent.fktm8-1.fna.fbcdn.net/v/t1.0-9/1497809_10151847660603435_304354483_n.jpg?_nc_cat=102&ccb=2&_nc_sid=9267fe&_nc_ohc=nzCC93A75tAAX9qnnQ0&_nc_ht=scontent.fktm8-1.fna&oh=c2c062c96b304cba7bb3899fd95df54c&oe=6012FDE5",
+      audio: `${base_url}/ma-hu-yaatri-mc-flo.mp3`,
+      color: ["#B0B0B0", "#A64067"],
       active: false,
     },
     // {

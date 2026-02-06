@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme, GlobalStyles } from './themes';
-import './styles/app.scss';
-import Nav from './components/Nav';
-import Song from './components/Song';
-import Player from './components/Player';
-import SongLists from './SongsList';
-import Library from './components/library/Library';
+import React, { useRef, useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme, GlobalStyles } from "./themes";
+import "./styles/app.scss";
+import Nav from "./components/Nav";
+import Song from "./components/Song";
+import Player from "./components/Player";
+import SongLists from "./SongsList";
+import Library from "./components/library/Library";
 
 function App() {
   /* ----- Audio Ref Begins ----- */
@@ -23,7 +23,7 @@ function App() {
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     fullTime: 0,
-    animatePercentage: 0
+    animatePercentage: 0,
   });
   /* ----- Song Info State Ends ----- */
 
@@ -31,7 +31,7 @@ function App() {
 
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
-  }
+  };
 
   /* ----- Theme Ends ----- */
 
@@ -44,31 +44,39 @@ function App() {
     const roundedCurrentTime = Math.round(currentTime);
     const roundedFullTime = Math.round(fullTime);
     const animation = Math.round((roundedCurrentTime / roundedFullTime) * 100); // get time in percentage
-    setSongInfo({ ...songInfo, currentTime, fullTime, animatePercentage: animation });
-  }
+    setSongInfo({
+      ...songInfo,
+      currentTime,
+      fullTime,
+      animatePercentage: animation,
+    });
+  };
   /* ----- Updating Time Handler Ends ----- */
 
   /* ----- Toggle Library Begins ----- */
   const toggleLibrary = () => {
     if (toggleLibrary) {
-      setLibraryStatus(!toggleLibrary)
+      setLibraryStatus(!toggleLibrary);
     }
-  }
+  };
   /* ----- Toggle Library Ends ----- */
 
   /* ----- Song End Handler Begins ----- */
   const songEndHandler = async () => {
     let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
     await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-    if (isPlaying)
-      audioRef.current.play();
-  }
+    if (isPlaying) audioRef.current.play();
+  };
   /* ----- Song End Handler Ends ----- */
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
-      <StyledApp className={`App ${libraryStatus ? 'library-active' : ''}`}>
-        <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} themeToggler={themeToggler} />
+      <StyledApp className={`App ${libraryStatus ? "library-active" : ""}`}>
+        <Nav
+          libraryStatus={libraryStatus}
+          setLibraryStatus={setLibraryStatus}
+          themeToggler={themeToggler}
+        />
         <div className="player-wrapper">
           <div className="player">
             <Song
@@ -110,12 +118,15 @@ function App() {
 }
 
 const StyledApp = styled.div`
-  color: ${props => props.theme.fontColor};
-  h1, h2, h3, button{
-    color: ${props => props.theme.fontColor};
+  color: ${(props) => props.theme.fontColor};
+  h1,
+  h2,
+  h3,
+  button {
+    color: ${(props) => props.theme.fontColor};
   }
-  button{
-    border: 2px solid ${props => props.theme.fontColor};
+  button {
+    border: 2px solid ${(props) => props.theme.fontColor};
   }
 `;
 
